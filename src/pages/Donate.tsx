@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import { Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 const Donate = () => {
   const { toast } = useToast();
@@ -30,28 +29,10 @@ const Donate = () => {
     { amount: 1000, label: "Field Trip" }
   ];
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
+  const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const { error } = await supabase
-      .from("contact_submissions")
-      .insert([
-        {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
-        }
-      ]);
-
-    if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive"
-      });
-      return;
-    }
-
+    // Static site - just show success message
     toast({
       title: "Message Sent!",
       description: "We'll get back to you soon."
@@ -59,7 +40,7 @@ const Donate = () => {
     setFormData({ name: "", email: "", message: "" });
   };
 
-  const handleDonateSubmit = async (e: React.FormEvent) => {
+  const handleDonateSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const amount = selectedAmount || parseFloat(customAmount);
 
@@ -72,24 +53,7 @@ const Donate = () => {
       return;
     }
 
-    const { error } = await supabase
-      .from("donations")
-      .insert([
-        {
-          amount: amount,
-          frequency: frequency
-        }
-      ]);
-
-    if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to process donation. Please try again.",
-        variant: "destructive"
-      });
-      return;
-    }
-
+    // Static site - just show success message
     toast({
       title: "Thank You!",
       description: `Your ${frequency === "monthly" ? "monthly" : "one-time"} donation of R${amount} will make a difference.`

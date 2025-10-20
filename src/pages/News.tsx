@@ -5,8 +5,6 @@ import { Input } from "@/components/ui/input";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 
 interface BlogPost {
@@ -24,16 +22,49 @@ interface BlogPost {
 }
 
 const News = () => {
-  const { data: blogPosts, isLoading } = useQuery<BlogPost[]>({
-    queryKey: ["blog-posts"],
-    queryFn: async () => {
-      // @ts-ignore - blog_posts table exists but types haven't been regenerated yet
-      const { data, error } = await supabase.from("blog_posts").select("*").eq("status", "published").order("published_at", { ascending: false });
-      
-      if (error) throw error;
-      return (data || []) as unknown as BlogPost[];
+  // Static blog posts data
+  const blogPosts: BlogPost[] = [
+    {
+      id: "1",
+      title: "How to Excel in Your Final Exams",
+      excerpt: "Discover proven strategies and study techniques that will help you prepare effectively for your final examinations.",
+      content: null,
+      image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      category: "Academic",
+      read_time: "5 min read",
+      published_at: "2024-01-15T10:00:00Z",
+      status: "published",
+      created_at: "2024-01-15T10:00:00Z",
+      updated_at: "2024-01-15T10:00:00Z"
     },
-  });
+    {
+      id: "2",
+      title: "Career Paths in Technology",
+      excerpt: "Explore the exciting world of technology careers and learn about the skills you need to succeed in this dynamic field.",
+      content: null,
+      image_url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+      category: "Career",
+      read_time: "7 min read",
+      published_at: "2024-01-10T10:00:00Z",
+      status: "published",
+      created_at: "2024-01-10T10:00:00Z",
+      updated_at: "2024-01-10T10:00:00Z"
+    },
+    {
+      id: "3",
+      title: "Mental Health and Well-being Tips",
+      excerpt: "Learn essential strategies for maintaining your mental health and managing stress during your high school years.",
+      content: null,
+      image_url: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80",
+      category: "Wellness",
+      read_time: "6 min read",
+      published_at: "2024-01-05T10:00:00Z",
+      status: "published",
+      created_at: "2024-01-05T10:00:00Z",
+      updated_at: "2024-01-05T10:00:00Z"
+    }
+  ];
+  const isLoading = false;
 
   return (
     <div className="min-h-screen">

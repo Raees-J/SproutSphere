@@ -5,35 +5,135 @@ import { Calendar } from "@/components/ui/calendar";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { format } from "date-fns";
 import { BookOpen, Heart, Dumbbell, Briefcase } from "lucide-react";
 import tutoringImage from "@/assets/tutoring.jpg";
-import { supabase } from "@/integrations/supabase/client";
 
 const Programs = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [month, setMonth] = useState<Date>(new Date());
-  const [dbEvents, setDbEvents] = useState<any[]>([]);
 
   const handleMonthChange = (newMonth: Date) => {
     setMonth(newMonth);
     setDate(undefined); // Clear day selection when month changes
   };
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const { data, error } = await supabase
-        .from("events")
-        .select("*")
-        .eq("status", "published")
-        .order("start_date", { ascending: true });
-      if (!error && data) {
-        setDbEvents(data);
-      }
-    };
-    fetchEvents();
-  }, []);
+  // Static events data
+  const dbEvents = [
+    {
+      id: "1",
+      title: "Career Exploration Workshop",
+      description: "Discover various career paths and meet professionals from different industries",
+      start_date: "2025-10-15T14:00:00Z",
+      category: "Career",
+      status: "published"
+    },
+    {
+      id: "2",
+      title: "Math Tutoring Session",
+      description: "Get help with algebra, geometry, and calculus from experienced tutors",
+      start_date: "2025-10-20T15:00:00Z",
+      category: "Academic",
+      status: "published"
+    },
+    {
+      id: "3",
+      title: "Study Skills Workshop",
+      description: "Learn effective note-taking and time management strategies",
+      start_date: "2025-10-25T14:00:00Z",
+      category: "Academic",
+      status: "published"
+    },
+    {
+      id: "4",
+      title: "Mental Health Awareness Day",
+      description: "Learn about stress management and emotional well-being",
+      start_date: "2025-11-05T13:00:00Z",
+      category: "Wellness",
+      status: "published"
+    },
+    {
+      id: "5",
+      title: "Science Fair",
+      description: "Showcase your projects and explore innovative student experiments",
+      start_date: "2025-11-10T10:00:00Z",
+      category: "Academic",
+      status: "published"
+    },
+    {
+      id: "6",
+      title: "Sports Tournament",
+      description: "Join us for an exciting day of team sports and friendly competition",
+      start_date: "2025-11-15T09:00:00Z",
+      category: "Sports",
+      status: "published"
+    },
+    {
+      id: "7",
+      title: "University Application Workshop",
+      description: "Get expert guidance on university applications and entrance exams",
+      start_date: "2025-11-20T15:00:00Z",
+      category: "Career",
+      status: "published"
+    },
+    {
+      id: "8",
+      title: "Peer Counseling Session",
+      description: "Connect with trained peer counselors for support and guidance",
+      start_date: "2025-11-25T14:00:00Z",
+      category: "Wellness",
+      status: "published"
+    },
+    {
+      id: "9",
+      title: "Basketball Skills Training",
+      description: "Improve your basketball skills with professional coaches",
+      start_date: "2025-12-05T16:00:00Z",
+      category: "Sports",
+      status: "published"
+    },
+    {
+      id: "10",
+      title: "English Literature Study Group",
+      description: "Collaborative learning session for English literature students",
+      start_date: "2025-12-08T15:00:00Z",
+      category: "Academic",
+      status: "published"
+    },
+    {
+      id: "11",
+      title: "Career Mentorship Program Launch",
+      description: "Meet your career mentors and set goals for the semester",
+      start_date: "2025-12-12T13:00:00Z",
+      category: "Career",
+      status: "published"
+    },
+    {
+      id: "12",
+      title: "Mindfulness and Meditation",
+      description: "Learn relaxation techniques to manage stress and anxiety",
+      start_date: "2025-12-18T14:00:00Z",
+      category: "Wellness",
+      status: "published"
+    },
+    {
+      id: "13",
+      title: "Soccer Match",
+      description: "Inter-school soccer match and team building activities",
+      start_date: "2025-12-22T15:00:00Z",
+      category: "Sports",
+      status: "published"
+    },
+    {
+      id: "14",
+      title: "STEM Workshop",
+      description: "Hands-on activities in Science, Technology, Engineering, and Math",
+      start_date: "2025-12-28T10:00:00Z",
+      category: "Academic",
+      status: "published"
+    }
+  ];
 
   // TypeScript interfaces
   interface Event {
