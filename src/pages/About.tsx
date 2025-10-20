@@ -1,13 +1,12 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import keaneImg from "@/assets/keane-small.jpg";
-import keitumetseImg from "@/assets/keitumetse-dimpe.png";
-import lifaImg from "@/assets/lifa-mbangata.jpg";
-import raeesImg from "@/assets/raees-johaadien.jpg";
+import keaneImg from "@/assets/Keane-Small.jpg";
+import keitumetseImg from "@/assets/Keitumetse-Dimpe.png";
+import lifaImg from "@/assets/Lifa-Mbangata.jpg";
+import raeesImg from "@/assets/Raees-Johaadien.jpg";
 import ukhanyoImg from "@/assets/ukhanyo-siyazi.jpg";
 
 const About = () => {
