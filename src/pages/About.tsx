@@ -4,11 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import keaneImg from "@/assets/keane-small.jfif";
+import keaneImg from "@/assets/keane-small.jpg";
 import keitumetseImg from "@/assets/keitumetse-dimpe.png";
 import lifaImg from "@/assets/lifa-mbangata.jpg";
 import raeesImg from "@/assets/raees-johaadien.jpg";
-import ukhanyoImg from "@/assets/ukhanyo-siyazi.jfif";
+import ukhanyoImg from "@/assets/ukhanyo-siyazi.jpg";
 
 const About = () => {
   const team = [
